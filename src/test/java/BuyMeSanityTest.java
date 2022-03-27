@@ -35,53 +35,33 @@ public class BuyMeSanityTest {
           introRegistration.getRegisterScreen();
         }
 
-        @Test(priority = 3)
+        @Test(priority = 2)
         public void giftSelectionDetails () throws InterruptedException {
         Thread.sleep(10000);
             homeScreen.giftSelectionDetails();
 
         }
 
-        @Test(priority = 5)
+        @Test(priority = 3)
         public void assertURL () {
             //Thread.sleep(10000);
             String URL = "https://buyme.co.il/search?budget=3&category=204&region=9";
             Assert.assertEquals(driver.getCurrentUrl(), URL);
 
         }
-        @Test(priority = 6)
+        @Test(priority = 4)
         public void pickBusiness () throws InterruptedException {
         Thread.sleep(10000);
             pickBusiness.businessSelection();
         }
 
-        @Test (priority = 7)
+        @Test (priority = 5)
     public void informationScreen () throws InterruptedException {
         informationScreen.senderAndReceiverInformation();
             }
 
-            @Test (priority = 8)
+            @Test (priority = 6)
     public void SendInformation() throws InterruptedException {
         sendInformation.informationToPayment();
             }
-
-
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
