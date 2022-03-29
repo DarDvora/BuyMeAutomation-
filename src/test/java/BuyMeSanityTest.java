@@ -3,30 +3,23 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
-import java.util.List;
 
 public class BuyMeSanityTest {
     private static WebDriver driver;
-    WebDriverWait wait = new WebDriverWait(SingletonWebDriver.chromeWebDriver(), Duration.ofSeconds(10));
 
     //reference to singleton webDriver
-    //public BuyMeSanityTest() {driver = SingletonWebDriver.chromeWebDriver();}
+    public BuyMeSanityTest() {driver = SingletonWebDriver.getInstance();}
     IntroRegistration introRegistration = new IntroRegistration();
     HomeScreen homeScreen = new HomeScreen();
     PickBusiness pickBusiness = new PickBusiness();
@@ -38,12 +31,11 @@ public class BuyMeSanityTest {
 
     @BeforeClass
     public void beforeClass() throws Exception {
+        //extent report
         String cwd = System.getProperty("user.dir");
-
         Date date = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
         ExtentSparkReporter htmlReporter = new ExtentSparkReporter(cwd + "\\extent.html" + (dateFormat.format(date)));
-
         extent = new ExtentReports();
         extent.attachReporter(htmlReporter);
         test = extent.createTest("first report", "sample description");
@@ -51,8 +43,12 @@ public class BuyMeSanityTest {
         test.log(Status.INFO, "@BeforeClass");
 
         try {
-            driver = SingletonWebDriver.chromeWebDriver();
-            introRegistration.entrance();
+            String type = SingletonWebDriver.getData("browserType");
+            if(type.equals("Chrome")){
+                driver.get(SingletonWebDriver.getData("url"));
+            }else if(type.equals("Edge")){
+                driver.get(SingletonWebDriver.getData("url"));
+            }
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
             test.log(Status.PASS, "Driver established successfully");
         } catch (Exception e) {

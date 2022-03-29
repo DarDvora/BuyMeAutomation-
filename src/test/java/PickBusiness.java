@@ -10,21 +10,21 @@ import java.util.List;
 public class PickBusiness {
     private WebDriver driver;
 
-    public PickBusiness (){this.driver = SingletonWebDriver.chromeWebDriver();}
-    WebDriverWait wait = new WebDriverWait(SingletonWebDriver.chromeWebDriver(), Duration.ofSeconds(10));
+    public PickBusiness (){this.driver = SingletonWebDriver.getInstance();}
+    WebDriverWait wait = new WebDriverWait(SingletonWebDriver.getInstance(), Duration.ofSeconds(10));
 
     public void businessSelection() throws InterruptedException {
         pickBusiness();
         insertAmount();
     }
-
+    //business selection
     public void pickBusiness () throws InterruptedException {
         Thread.sleep(5000);
         WebElement TevaNaot = driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div[1]/div/ul/div[7]/a"));
         wait.until(ExpectedConditions.elementToBeClickable(TevaNaot));
         TevaNaot.click();
     }
-
+    //insert amount
     public void insertAmount() throws InterruptedException {
         Thread.sleep(10000);
         WebElement insertAmount = driver.findElement(By.cssSelector("input[type=tel]"));

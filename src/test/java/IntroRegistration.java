@@ -9,17 +9,18 @@ import java.time.Duration;
 import java.util.List;
 
 public class IntroRegistration extends BasePage {
-    private WebDriver driver;
+    private WebDriver driver = SingletonWebDriver.getInstance();
+    WebDriverWait wait = new WebDriverWait(SingletonWebDriver.getInstance(), Duration.ofSeconds(10));
 
-    public IntroRegistration (){ this.driver = SingletonWebDriver.chromeWebDriver();}
-    WebDriverWait wait = new WebDriverWait(SingletonWebDriver.chromeWebDriver(), Duration.ofSeconds(10));
 
     public void getRegisterScreen(){
         pressIntroRegistration();
         registrationInsertDetails();
         clickRegister();
     }
-    public void entrance (){driver.get("https://buyme.co.il/");
+    //opening website
+    public void entrance (){
+        driver.get("https://buyme.co.il/");
         driver.manage().window().maximize();}
 
     //registrationOrEntrance button

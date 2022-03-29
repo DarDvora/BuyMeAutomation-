@@ -3,15 +3,15 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+//This class concentrates functions that are useful during the project
 public class BasePage {
 
     public WebElement getWebElement(By locator) {
-        return SingletonWebDriver.chromeWebDriver().findElement(locator);
+        return SingletonWebDriver.getInstance().findElement(locator);
     }
     public void clickElement(By locator) {
         getWebElement(locator).click();
@@ -25,11 +25,10 @@ public class BasePage {
     public void sendKeysToElement(By locator, String text) {
         getWebElement(locator).sendKeys(text);
     }
-    public void clearElement(By locator) {
-        getWebElement(locator).clear();
-    }
+
+    //screenshot function to document failed tests
     public static String takeScreenShot(String ImagesPath) {
-        TakesScreenshot takesScreenshot = (TakesScreenshot) SingletonWebDriver.chromeWebDriver();
+        TakesScreenshot takesScreenshot = (TakesScreenshot) SingletonWebDriver.getInstance();
         File screenShotFile = takesScreenshot.getScreenshotAs(OutputType.FILE);
         File destinationFile = new File(ImagesPath + ".png");
         try {

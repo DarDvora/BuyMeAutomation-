@@ -7,7 +7,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="SecondProgect" />
+        <module name="SecondProject_BuyMe" />
       </profile>
     </annotationProcessing>
   </component>
